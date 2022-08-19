@@ -22,7 +22,7 @@ const Stars = ({ stars, reviews }) => {
   return (
     <Wrapper>
       <div className='stars'>{tempArr}</div>
-      <p className='reviews'>{reviews}</p>
+      <p className='reviews'>{reviews} reviews</p>
     </Wrapper>
   );
 };
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
   }
   p {
     margin-left: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 2.5px;
   }
   margin-bottom: 0.5rem;
 `;

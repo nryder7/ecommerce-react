@@ -1,13 +1,64 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { FaCheck } from 'react-icons/fa'
-import { useCartContext } from '../context/cart_context'
-import AmountButtons from './AmountButtons'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { FaCheck } from 'react-icons/fa';
+import { useCartContext } from '../context/cart_context';
+import AmountButtons from './AmountButtons';
+import { CgLaptop } from 'react-icons/cg';
 
-const AddToCart = () => {
-  return <h4>addToCart </h4>
-}
+const AddToCart = ({ product }) => {
+  const { id, stock, colors } = product;
+  const [count, setCount] = useState(1);
+  const [colorIndex, setColorIndex] = useState(0);
+
+  const increment = () => {
+    if (count === stock) {
+      return;
+    }
+    setCount(count + 1);
+  };
+  const decrement = () => {
+    if (count === 1) {
+      return;
+    }
+    setCount(count - 1);
+  };
+
+  return (
+    <Wrapper>
+      <div className='colors'>
+        <span>colors : </span>
+        <div>
+          {colors.map((color, index) => {
+            return (
+              <button
+                key={index}
+                className={
+                  index === colorIndex ? 'active color-btn' : 'color-btn'
+                }
+                style={{ backgroundColor: color }}
+                onClick={() => setColorIndex(index)}
+              >
+                {index === colorIndex && <FaCheck />}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className='btn-container'>
+        <AmountButtons
+          quantity={count}
+          increment={increment}
+          decrement={decrement}
+        />
+        <Link to='/cart' className='btn'>
+          add to cart
+        </Link>
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   margin-top: 2rem;
@@ -43,7 +94,7 @@ const Wrapper = styled.section`
     }
   }
   .active {
-    opacity: 1;
+    opacity: 0.9;
   }
   .btn-container {
     margin-top: 2rem;
@@ -53,5 +104,8 @@ const Wrapper = styled.section`
     margin-top: 1rem;
     width: 140px;
   }
-`
-export default AddToCart
+  a {
+    text-align: center;
+  }
+`;
+export default AddToCart;

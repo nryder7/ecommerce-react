@@ -1,10 +1,16 @@
-import React from 'react'
-import styled from 'styled-components'
-import { FaPlus, FaMinus } from 'react-icons/fa'
+import React from 'react';
+import styled from 'styled-components';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 
-const AmountButtons = () => {
-  return <h4>amount buttons </h4>
-}
+const AmountButtons = ({ quantity, increment, decrement }) => {
+  return (
+    <Wrapper className='amount-btns'>
+      <FaMinus onClick={decrement} />
+      <h2>{quantity}</h2>
+      <FaPlus onClick={increment} />
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   display: grid;
@@ -14,6 +20,7 @@ const Wrapper = styled.div`
   align-items: center;
   h2 {
     margin-bottom: 0;
+    padding-bottom: 0.35rem;
   }
   button {
     background: transparent;
@@ -29,6 +36,6 @@ const Wrapper = styled.div`
   h2 {
     margin-bottom: 0;
   }
-`
+`;
 
-export default AmountButtons
+export default AmountButtons;
