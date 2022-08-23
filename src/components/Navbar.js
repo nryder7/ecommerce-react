@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../assets/logo.svg';
-// import { FaBars } from 'react-icons/fa';
-import { CgMenuHotdog } from 'react-icons/cg';
+import { FaBars } from 'react-icons/fa';
+// import { CgMenuHotdog } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 import { links } from '../utils/constants';
 import CartButtons from './CartButtons';
@@ -19,8 +19,8 @@ const Nav = () => {
             <img src={logo} alt='store logo' />
           </Link>
           <button type='button' className='nav-toggle' onClick={openSidebar}>
-            {/* <FaBars /> */}
-            <CgMenuHotdog />
+            <FaBars />
+            {/* <CgMenuHotdog /> */}
           </button>
         </div>
         <ul className='nav-links'>
@@ -65,7 +65,10 @@ const Wrapper = styled.nav`
     color: var(--clr-primary-5);
     cursor: pointer;
     svg {
-      font-size: 3rem;
+      font-size: 2rem;
+       {
+        /* font-size: 3rem; */
+      }
     }
   }
   .nav-links {

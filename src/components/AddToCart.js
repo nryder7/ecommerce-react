@@ -10,6 +10,7 @@ const AddToCart = ({ product }) => {
   const { id, stock, colors } = product;
   const [count, setCount] = useState(1);
   const [colorIndex, setColorIndex] = useState(0);
+  const { addToCart } = useCartContext();
 
   const increment = () => {
     if (count === stock) {
@@ -52,7 +53,13 @@ const AddToCart = ({ product }) => {
           increment={increment}
           decrement={decrement}
         />
-        <Link to='/cart' className='btn'>
+        <Link
+          onClick={() =>
+            addToCart({ id, count, color: colors[colorIndex], product })
+          }
+          to='/cart'
+          className='btn'
+        >
           add to cart
         </Link>
       </div>
