@@ -11,10 +11,14 @@ import {
 
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
+    let maxPrice = action.payload.map((product) => product.price);
+    maxPrice = Math.max(...maxPrice);
+
     return {
       ...state,
       all_products: [...action.payload],
       filtered_products: [...action.payload],
+      filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
     };
   }
   if (action.type === SET_GRIDVIEW) {
@@ -35,6 +39,7 @@ const filter_reducer = (state, action) => {
       sort: action.payload,
     };
   }
+
   if (action.type === SORT_PRODUCTS) {
     let tempProducts = [];
     const { filtered_products, sort } = state;
@@ -54,6 +59,32 @@ const filter_reducer = (state, action) => {
     if (sort === 'priceHigh') {
       tempProducts = filtered_products.sort((a, b) => b.price - a.price);
     }
+    return {
+      ...state,
+      filtered_products: tempProducts,
+    };
+  }
+  if (action.type === UPDATE_FILTERS) {
+    return {
+      ...state,
+      filters: {
+        ...state.filters,
+        [action.payload.name]: action.payload.value,
+      },
+    };
+  }
+
+  if (action.type === FILTER_PRODUCTS) {
+    let tempProducts = [...state.all_products].filter((item) => {
+      const { category, color, company } = state.filters;
+      if (
+        (item.category === category || category === 'all') &&
+        (item.colors.includes(color) || color === 'all') &&
+        (item.company === company || company === 'all')
+      ) {
+        return item;
+      }
+    });
     return {
       ...state,
       filtered_products: tempProducts,
