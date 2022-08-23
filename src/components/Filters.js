@@ -16,7 +16,7 @@ const Filters = () => {
       color,
       min_price,
       max_price,
-      actual_price,
+      price,
       shipping,
     },
   } = useFilterContext();
@@ -113,6 +113,32 @@ const Filters = () => {
               })}
             </div>
           </div>
+          <div className='form-control'>
+            <h5>price</h5>
+            <p className='price'>{formatPrice(price)}</p>
+            <input
+              type='range'
+              name='price'
+              id='price'
+              value={price}
+              onChange={updateFilters}
+              min={min_price}
+              max={max_price}
+            />
+          </div>
+          <div className='form-control shipping'>
+            <label htmlFor='shipping'>free shipping</label>
+            <input
+              type='checkbox'
+              name='shipping'
+              id='shipping'
+              onChange={updateFilters}
+              checked={shipping}
+            />
+          </div>
+          <button type='button' className='clear-btn' onClick={clearFilters}>
+            clear filters
+          </button>
         </form>
       </div>
     </Wrapper>

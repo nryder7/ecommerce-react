@@ -74,13 +74,33 @@ const filter_reducer = (state, action) => {
     };
   }
 
+  if (action.type === CLEAR_FILTERS) {
+    const { text, company, category, color, shipping } = action.payload;
+    return {
+      ...state,
+      filters: {
+        ...state.filters,
+        text,
+        company,
+        category,
+        color,
+        shipping,
+        price: state.filters.max_price,
+      },
+    };
+  }
+
   if (action.type === FILTER_PRODUCTS) {
+    const { category, color, company, price, shipping, text } = state.filters;
+
     let tempProducts = [...state.all_products].filter((item) => {
-      const { category, color, company } = state.filters;
       if (
-        (item.category === category || category === 'all') &&
-        (item.colors.includes(color) || color === 'all') &&
-        (item.company === company || company === 'all')
+        item.price <= price &&
+        (!shipping || item.shipping) &&
+        (!text || item.name.includes(text)) &&
+        (category === 'all' || item.category === category) &&
+        (color === 'all' || item.colors.includes(color)) &&
+        (company === 'all' || item.company === company)
       ) {
         return item;
       }

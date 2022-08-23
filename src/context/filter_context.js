@@ -46,17 +46,25 @@ export const FilterProvider = ({ children }) => {
   };
 
   const updateFilters = (e) => {
+    let value = e.target.value;
+    let name = e.target.name;
+    if (name === 'price') {
+      value = Number(value);
+    }
+    if (name === 'shipping') {
+      value = e.target.checked;
+    }
     dispatch({
       type: UPDATE_FILTERS,
       payload: {
-        name: e.target.name,
-        value: e.target.value,
+        name,
+        value,
       },
     });
   };
 
   const clearFilters = () => {
-    dispatch({ type: CLEAR_FILTERS });
+    dispatch({ type: CLEAR_FILTERS, payload: initialState.filters });
   };
 
   useEffect(() => {
@@ -70,7 +78,14 @@ export const FilterProvider = ({ children }) => {
 
   return (
     <FilterContext.Provider
-      value={{ ...state, setGrid, setList, updateSort, updateFilters }}
+      value={{
+        ...state,
+        setGrid,
+        setList,
+        updateSort,
+        updateFilters,
+        clearFilters,
+      }}
     >
       {children}
     </FilterContext.Provider>
