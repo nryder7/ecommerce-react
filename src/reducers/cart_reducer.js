@@ -50,7 +50,7 @@ const cart_reducer = (state, action) => {
   if (action.type === TOGGLE_CART_ITEM_AMOUNT) {
     const { id, value } = action.payload;
     let tempItem = [...state.cart].find((item) => item.id === id);
-    let tempCart = [...state.cart].filter((item) => {
+    let tempCart = [...state.cart].flatMap((item) => {
       if (item === tempItem) {
         const { stock } = item;
         if (value === 'inc') {
@@ -61,7 +61,7 @@ const cart_reducer = (state, action) => {
         }
         if (value === 'dec') {
           if (item.count <= 1) {
-            return;
+            return [];
           }
           return { ...item, count: (item.count -= 1) };
         }

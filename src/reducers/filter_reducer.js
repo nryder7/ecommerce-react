@@ -102,7 +102,9 @@ const filter_reducer = (state, action) => {
         (color === 'all' || item.colors.includes(color)) &&
         (company === 'all' || item.company === company)
       ) {
-        return item;
+        return true;
+      } else {
+        return false;
       }
     });
     return {

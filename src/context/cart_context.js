@@ -29,6 +29,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     dispatch({ type: COUNT_CART_TOTALS });
     setLocalStorage();
+    // eslint-disable-next-line
   }, [state.cart]);
 
   const addToCart = ({ id, count, color, product }) => {

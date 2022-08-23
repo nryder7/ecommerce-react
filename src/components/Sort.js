@@ -7,7 +7,7 @@ import { UPDATE_SORT } from '../actions';
 const Sort = () => {
   const { filtered_products, grid_view, setGrid, setList, sort, updateSort } =
     useFilterContext();
-
+  // eslint-disable-next-line
   return (
     <Wrapper>
       <div className='btn-container'>
