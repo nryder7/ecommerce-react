@@ -11,6 +11,7 @@ import { useUserContext } from '../context/user_context';
 
 const Nav = () => {
   const { openSidebar } = useProductsContext();
+  const { myUser } = useUserContext();
   return (
     <Wrapper>
       <div className='nav-center'>
@@ -20,7 +21,6 @@ const Nav = () => {
           </Link>
           <button type='button' className='nav-toggle' onClick={openSidebar}>
             <FaBars />
-            {/* <CgMenuHotdog /> */}
           </button>
         </div>
         <ul className='nav-links'>
@@ -32,6 +32,11 @@ const Nav = () => {
               </li>
             );
           })}
+          {myUser && (
+            <li>
+              <Link to='/checkout'>Checkout</Link>
+            </li>
+          )}
         </ul>
         <CartButtons />
       </div>

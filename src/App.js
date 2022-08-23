@@ -22,7 +22,7 @@ function App() {
         <Route exact path='/' children={<Home />}></Route>
         <Route exact path='/about' children={<About />}></Route>
         <Route exact path='/cart' children={<Cart />}></Route>
-        <Route exact path='/checkout' children={<Checkout />}></Route>
+        <PrivateRoute exact path='/checkout' children={<Checkout />} />
         <Route exact path='/products' children={<Products />}></Route>
         <Route exact path='/products/:id' children={<SingleProduct />}></Route>
         <Route path='*' children={<Error />}></Route>
